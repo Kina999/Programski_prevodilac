@@ -1,0 +1,20 @@
+//OPIS:When bez otherwise
+//RETURN: 10
+function int main(){
+	int a = 8;
+	int b = 5;
+	int c = 3, d = 2;
+	check (a){
+		when 1 => b = 3; 
+		break;
+		when 8 => b = c + 1;
+		when 3 => b = c + 1;
+		}
+	check (a){
+		when 1 => b = 3; 
+		break;
+		when 8 => c = 6;
+		when 3 => b = b + c;
+		}
+	return b;
+}

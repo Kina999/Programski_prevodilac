@@ -1,0 +1,15 @@
+//OPIS: void i return;
+//RETURN: 0
+function void main() {
+    int h,b;
+    int c,d,e,f;
+    unsigned int g;
+		h = 1;
+		b = 2; 
+		c = 3; 
+		d = b++; 
+		e = 0; 
+		f = h + b; 
+		g = 1u;
+		return;
+}

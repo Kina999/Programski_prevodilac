@@ -1,0 +1,17 @@
+//OPIS:  Vise razlicitih parametara
+//RETURN: 0
+function int f(int k, unsigned int p, unsigned int o, int f, unsigned int y, int i){
+	p = o + y;
+	return k;
+} 
+
+function int main(){
+	int x;
+	int b;
+	unsigned int c;
+	b = 1;
+	c = 2u;
+	x = f(b, 5u, c, 6, 65U, 7);
+	return 0;
+}
+

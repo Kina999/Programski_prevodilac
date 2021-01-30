@@ -1,0 +1,5 @@
+//OPIS: ponovljena promenljiva
+function int main() {
+    int x,b,x;
+	return 0;
+}

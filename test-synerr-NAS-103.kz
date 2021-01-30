@@ -1,0 +1,4 @@
+//OPIS: dva zareza
+function int foo(int x, unsigned int b, unsigned int c,, int k, int p){
+	return x;
+}

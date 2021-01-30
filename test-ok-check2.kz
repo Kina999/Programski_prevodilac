@@ -1,0 +1,18 @@
+//OPIS: When sa otherwise
+//RETURN: 8
+function int main(){
+	int a = 4;
+	int b = 4;
+	check (a){
+		when 1 => 
+			a = 5; 
+			break;
+		when 2 =>
+		{
+			b = 3;
+		}
+		otherwise =>
+			a = a + b;
+	}
+	return a;
+}

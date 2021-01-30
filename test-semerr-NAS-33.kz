@@ -1,0 +1,7 @@
+//OPIS: ponovljena promenljiva
+function int main() {
+    int x,b,c;
+    int d,e,f;
+    unsigned int g,e,h;
+    int q,w;
+}

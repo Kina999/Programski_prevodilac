@@ -1,0 +1,15 @@
+//OPIS: Pogresni tipovi argumenata (samo 2.)
+
+
+function int f(int k, unsigned int p, unsigned int o, int f, unsigned int y, int i){
+	p = o + y;
+	return k;
+} 
+
+function int main(){
+	int k;
+	int b;
+	unsigned int c;
+	k = f(b, 5, c, 6, 65U, 7);
+	return 0;
+}

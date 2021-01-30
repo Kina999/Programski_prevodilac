@@ -1,0 +1,6 @@
+//OPIS:Dodjela vrijednosti pogresnog tipa globalnoj promjenljivoj
+int g;
+function int main(){
+	g = 3u;
+	return 0;
+}

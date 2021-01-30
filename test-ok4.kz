@@ -1,0 +1,17 @@
+//OPIS:Provjera rada sa unsigned vrijednostima
+//RETURN: 4
+function unsigned int kina(unsigned int r){
+	int a = 3;
+	int b;
+	b = 2;
+	r = 3u;
+	return r;
+}
+function unsigned int main(){
+	int a = 0;
+	unsigned int b = 1u;
+	unsigned int d;
+	d = kina(b);
+	d++;
+	return d;
+}

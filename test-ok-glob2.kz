@@ -1,0 +1,11 @@
+//OPIS: Poziv funkcije vise parametara
+//RETURN: 4
+int x;
+function void k(int b, unsigned int m, int g){
+	x = g;
+}
+function int main(){
+	int b = 4;
+	k(b, 2u, 4);
+	return x;
+}

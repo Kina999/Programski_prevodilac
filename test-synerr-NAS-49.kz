@@ -1,0 +1,10 @@
+//OPIS: ++ nije kao poseban token
+function int main() {
+    int x = 2;
+    int b = 2;
+    int c = 2;
+
+    3+ +;
+	
+    return 0;
+}  

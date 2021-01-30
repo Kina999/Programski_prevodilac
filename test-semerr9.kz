@@ -1,0 +1,5 @@
+//OPIS:NE void funkcija bez povratne vrijednosti
+function int main(){
+	int a = 3;
+	return;
+}

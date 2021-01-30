@@ -1,0 +1,14 @@
+//OPIS: unsigned funkcija sa vise razlicitih parametara
+//RETURN: 0
+
+
+function unsigned int f(int k, unsigned int p, unsigned int o){
+	int g;
+	g = k + 1 ;
+
+	return (p + o);
+} 
+
+function int main(){
+	return 0;
+}

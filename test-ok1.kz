@@ -1,0 +1,32 @@
+//OPIS:Program koji racuna 
+//apsolutnu vrednost unetog broja
+//RETURN: 1
+
+int b;
+//Funkcija koja racuna apsolutnu vrednost
+function int abs(int broj) {
+  int x;
+  if(broj < 0){
+    x = 0 - broj; //negativan broj
+  }
+  else
+  {
+    x = broj;     //pozitivan broj
+  }
+  return x;
+}
+
+/* Sada ide tijelo 
+funkcije main
+*/
+function int main() {
+  int res,as = 1,s = 2;
+  int a;
+  int k = 1;
+  int b = 2;
+  a = b - 2;
+  a--;
+  res = abs(a); // poziv funkcije
+  return res;
+}
+

@@ -1,0 +1,19 @@
+//OPIS: Dva loopa
+//RETURN: 14
+function int main(){
+	int a = 3;
+	int b = 3;
+	<!- loop -!>
+	{
+		a = a + 3;
+		a++;
+	}
+	<!- puka manawa ( a < 10) hopau loop -!>;
+	<!- loop -!>
+	{
+		b = b + 3;
+		b++;
+	}
+	<!- puka manawa ( b < 10) hopau loop -!>;
+	return a + b;
+}

@@ -1,0 +1,23 @@
+//OPIS:Testiranje returna
+//RETURN: 3
+function void kinav(int k, unsigned int j){
+	k = 2;
+	j = 1u;
+	return;
+}
+
+function int kinai(){
+	int f = 3;
+	return f;
+}
+
+function unsigned int kinau(int y){
+	unsigned int g = 3u;
+	return g; 
+}
+
+function int main(){
+	int f = 3, c = 3;
+	unsigned int b = 3u;
+	return f;
+}

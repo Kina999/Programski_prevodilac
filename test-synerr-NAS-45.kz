@@ -1,0 +1,8 @@
+//OPIS: inc primenjen nad literalom kao exp
+function int main() {
+    	int c;
+    	int z;
+
+		  z = 5++;
+		  return 0;
+}

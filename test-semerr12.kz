@@ -1,0 +1,6 @@
+//OPIS: Promjenljive kojima nije dodjeljena vrijednost
+function int main(){
+	int a,b = 3;
+	unsigned int d;
+	return 0;
+}

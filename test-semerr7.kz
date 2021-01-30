@@ -1,0 +1,11 @@
+//OPIS:Neispravni parametri u pozivu f-je
+function int k(unsigned int a, int b, unsigned int c){
+	return c;
+}
+function int main(){
+	int a = 3;
+	int b = 6;
+	unsigned int c = 4u;
+	b = k(c, a, a);
+	return 0;
+}

@@ -1,0 +1,7 @@
+//OPIS:Iskazi u check-u razlicitog tipa
+function int main(){
+	int a = 3;
+	unsigned int b = 3u;
+	a = a + (a == b) ? 1 : 2;
+	return 0;
+}

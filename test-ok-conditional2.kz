@@ -1,0 +1,15 @@
+//OPIS: Condition expression
+//RETURN: 10
+function int k(int l, unsigned int q, int h){
+	int b;
+	b = l + (h < l) ? 3 : l;
+	return b; 
+}
+function int main(){
+	int a = 1;
+	int b = 6;
+	int c;
+	c = k(a, 3u, 1);
+	c = c + (a == b) ?1:2;
+	return c + b;
+}

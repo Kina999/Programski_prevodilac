@@ -1,0 +1,6 @@
+//OPIS: Dodjela vrijednosti pogresnog tipa promjenljivoj
+function int main(){
+	int a = 4,b;
+	b = 3u;
+	return 0;
+}

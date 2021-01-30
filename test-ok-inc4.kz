@@ -1,0 +1,7 @@
+//OPIS: Dekrement
+//RETURN: 2
+function int main(){
+	int a = 3;
+	a--;
+	return a;
+}

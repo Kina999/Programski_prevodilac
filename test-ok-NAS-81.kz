@@ -1,0 +1,10 @@
+//OPIS: void kao tip funkcije
+//RETURN: 0
+function void main(int p) {
+    int d, b;
+    int c;
+    d = 2;
+    b = 3;
+		c = d + b;
+}
+

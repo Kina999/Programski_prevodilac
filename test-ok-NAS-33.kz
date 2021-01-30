@@ -1,0 +1,9 @@
+//OPIS: više deklaracija sa više promenljivih
+//RETURN: 0
+
+function int main() {
+    int x = 2,b = 2;
+    int c = 1,d = 1,e = 1,f = 2;
+    unsigned int g = 3u;
+    return 0;
+}

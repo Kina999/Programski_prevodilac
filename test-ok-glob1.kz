@@ -1,0 +1,13 @@
+//OPIS:Izmjena globalne promjenljive preko void funkcije
+//RETURN: 7
+int g;
+function void k(int b){
+	g = b;
+}
+
+function int main(){
+	int a = 3;
+	int b = 4;
+	k(b);
+	return a + g;
+}

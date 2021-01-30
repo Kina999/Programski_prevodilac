@@ -1,0 +1,8 @@
+//OPIS: fali tacka zarez u statementu
+function int main() {
+		int c = 2;
+    int d = 2;
+
+		d = c++
+		return 0;
+}

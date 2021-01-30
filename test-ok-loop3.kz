@@ -1,0 +1,13 @@
+//OPIS:Obican loop
+//RETURN: 13
+function int main(){
+	int a = 1;
+	int b = 3;
+	<!- loop -!>
+	{
+	   a = a + 3;
+           a++;
+	}
+	<!- puka manawa (a >= 10) hopau loop -!>;
+	return a;
+}

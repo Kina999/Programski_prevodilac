@@ -1,0 +1,9 @@
+//OPIS: ponovljena promenljiva
+function int main() {
+    int a = 3,b = 3,c = 3; 
+    int d = 3,e = 3,f = 3;
+    unsigned int g = 3u,e = 3u,h = 3u; 
+    int q = 3,w = 3;
+    return 3;
+}
+

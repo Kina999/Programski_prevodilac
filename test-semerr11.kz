@@ -1,0 +1,5 @@
+//OPIS: Literal razlicit od promjenljive koju inicijalizuje
+function int main(){
+	int a = 3u;
+	return 0;
+}

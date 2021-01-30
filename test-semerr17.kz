@@ -1,0 +1,4 @@
+//OPIS: NE void fja bez povratne vrijednosti
+function unsigned int main(){
+	unsigned int b = 3u;
+}

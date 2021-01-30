@@ -1,0 +1,22 @@
+//OPIS: inkrement i dekrement na vise mjesta
+//RETURN: 302
+
+int y;
+
+function int f(int a) {
+    int b;
+    b = a-- + 13;
+    a = b-- + 7;
+    return a + b;
+}
+
+
+function int main() {
+    int x;
+    int z;
+    x = f(0); 	
+    y = f(x++); 
+    z = x++ + y++ + 42;
+    return x + y + z;
+}
+

@@ -1,0 +1,19 @@
+//OPIS:Dodjela vrijednosti unutar definicije promjenljive
+//RETURN: 31
+function int al(){
+	int c = 3, b = 2;	
+ 	c = b;	
+ 	return c;
+}
+function int main(){
+ 	int a = 6;	//moguca dodjela vrijednosti unutar definicije promjenljive
+ 	int b = 5; //sve definicije moraju biti iznad izraza
+ 	int c = 9;
+ 	int x;
+ 	a = 10;
+ 	b = 9;
+ 	c = a+b-(-10);
+ 	x = al();
+ 	return c + x;
+}
+

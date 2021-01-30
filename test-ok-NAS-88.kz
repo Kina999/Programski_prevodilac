@@ -1,0 +1,16 @@
+//OPIS: int funkcija vraca num_exp
+//RETURN: 4
+
+function int f(){
+	int k;
+	int g;
+
+	k = 1;
+	g = 3;
+	return k + g;
+
+}
+
+function int main(){
+	return f();
+} 

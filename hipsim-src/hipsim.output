@@ -1,0 +1,1036 @@
+Основа
+
+    0 $accept: program $end
+
+    1 program: variable_list code_list
+
+    2 variable_list: %empty
+    3              | variable_list variable
+
+    4 @1: %empty
+
+    5 variable: _LABEL_DEF @1 _WORD _NUMBER
+
+    6 code_list: code_line
+    7          | code_list code_line
+
+    8 code_line: label_def
+    9          | asm_line
+
+   10 label_def: _LABEL_DEF
+
+   11 asm_line: arithmetic
+   12         | flowcontrol
+   13         | stack
+   14         | _HALT
+
+   15 arithmetic: _ADD input _COMMA input _COMMA output
+   16           | _SUB input _COMMA input _COMMA output
+   17           | _MUL input _COMMA input _COMMA output
+   18           | _DIV input _COMMA input _COMMA output
+   19           | _MOV input _COMMA output
+
+   20 flowcontrol: _CMP input _COMMA input
+   21            | _JMP label
+   22            | _JEQ label
+   23            | _JNE label
+   24            | _JGT label
+   25            | _JLT label
+   26            | _JGE label
+   27            | _JLE label
+   28            | _JC label
+   29            | _JNC label
+   30            | _JO label
+   31            | _JNO label
+
+   32 stack: _PUSH input
+   33      | _POP output
+   34      | _CALL label
+   35      | _RET
+
+   36 label: _LABEL
+
+   37 output: _REGISTER
+   38       | _NUMBER _LPAREN _REGISTER _RPAREN
+   39       | _LPAREN _REGISTER _RPAREN
+   40       | label
+
+   41 input: _CONSTANT
+   42      | _ADDRESS
+   43      | output
+
+
+Терминали, са правилима где се појављују
+
+    $end (0) 0
+    error (256)
+    _WORD (258) 5
+    _PUSH (259) 32
+    _POP (260) 33
+    _CALL (261) 34
+    _RET (262) 35
+    _CMP <i> (263) 20
+    _JMP (264) 21
+    _JEQ (265) 22
+    _JNE (266) 23
+    _JGT <i> (267) 24
+    _JLT <i> (268) 25
+    _JGE <i> (269) 26
+    _JLE <i> (270) 27
+    _JC (271) 28
+    _JNC (272) 29
+    _JO (273) 30
+    _JNO (274) 31
+    _ADD <i> (275) 15
+    _SUB <i> (276) 16
+    _MUL <i> (277) 17
+    _DIV <i> (278) 18
+    _MOV (279) 19
+    _HALT (280) 14
+    _REGISTER <i> (281) 37 38 39
+    _CONSTANT <i> (282) 41
+    _NUMBER <i> (283) 5 38
+    _LABEL_DEF <s> (284) 5 10
+    _LABEL <s> (285) 36
+    _ADDRESS <s> (286) 42
+    _COMMA (287) 15 16 17 18 19 20
+    _LPAREN (288) 38 39
+    _RPAREN (289) 38 39
+
+
+Нетерминали, са правилима где се појављују
+
+    $accept (35)
+        на лево: 0
+    program (36)
+        на лево: 1
+        на десно: 0
+    variable_list (37)
+        на лево: 2 3
+        на десно: 1 3
+    variable (38)
+        на лево: 5
+        на десно: 3
+    @1 (39)
+        на лево: 4
+        на десно: 5
+    code_list (40)
+        на лево: 6 7
+        на десно: 1 7
+    code_line (41)
+        на лево: 8 9
+        на десно: 6 7
+    label_def (42)
+        на лево: 10
+        на десно: 8
+    asm_line (43)
+        на лево: 11 12 13 14
+        на десно: 9
+    arithmetic (44)
+        на лево: 15 16 17 18 19
+        на десно: 11
+    flowcontrol (45)
+        на лево: 20 21 22 23 24 25 26 27 28 29 30 31
+        на десно: 12
+    stack (46)
+        на лево: 32 33 34 35
+        на десно: 13
+    label <s> (47)
+        на лево: 36
+        на десно: 21 22 23 24 25 26 27 28 29 30 31 34 40
+    output <s> (48)
+        на лево: 37 38 39 40
+        на десно: 15 16 17 18 19 33 43
+    input <s> (49)
+        на лево: 41 42 43
+        на десно: 15 16 17 18 19 20 32
+
+
+Стање 0
+
+    0 $accept: . program $end
+
+    $основно  смањује користећи правило 2 (variable_list)
+
+    program        иде на стање 1
+    variable_list  иде на стање 2
+
+
+Стање 1
+
+    0 $accept: program . $end
+
+    $end  помера, и иде на стање 3
+
+
+Стање 2
+
+    1 program: variable_list . code_list
+    3 variable_list: variable_list . variable
+
+    _PUSH       помера, и иде на стање 4
+    _POP        помера, и иде на стање 5
+    _CALL       помера, и иде на стање 6
+    _RET        помера, и иде на стање 7
+    _CMP        помера, и иде на стање 8
+    _JMP        помера, и иде на стање 9
+    _JEQ        помера, и иде на стање 10
+    _JNE        помера, и иде на стање 11
+    _JGT        помера, и иде на стање 12
+    _JLT        помера, и иде на стање 13
+    _JGE        помера, и иде на стање 14
+    _JLE        помера, и иде на стање 15
+    _JC         помера, и иде на стање 16
+    _JNC        помера, и иде на стање 17
+    _JO         помера, и иде на стање 18
+    _JNO        помера, и иде на стање 19
+    _ADD        помера, и иде на стање 20
+    _SUB        помера, и иде на стање 21
+    _MUL        помера, и иде на стање 22
+    _DIV        помера, и иде на стање 23
+    _MOV        помера, и иде на стање 24
+    _HALT       помера, и иде на стање 25
+    _LABEL_DEF  помера, и иде на стање 26
+
+    variable     иде на стање 27
+    code_list    иде на стање 28
+    code_line    иде на стање 29
+    label_def    иде на стање 30
+    asm_line     иде на стање 31
+    arithmetic   иде на стање 32
+    flowcontrol  иде на стање 33
+    stack        иде на стање 34
+
+
+Стање 3
+
+    0 $accept: program $end .
+
+    $основно  прихвата
+
+
+Стање 4
+
+   32 stack: _PUSH . input
+
+    _REGISTER  помера, и иде на стање 35
+    _CONSTANT  помера, и иде на стање 36
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _ADDRESS   помера, и иде на стање 39
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 42
+    input   иде на стање 43
+
+
+Стање 5
+
+   33 stack: _POP . output
+
+    _REGISTER  помера, и иде на стање 35
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 44
+
+
+Стање 6
+
+   34 stack: _CALL . label
+
+    _LABEL  помера, и иде на стање 38
+
+    label  иде на стање 45
+
+
+Стање 7
+
+   35 stack: _RET .
+
+    $основно  смањује користећи правило 35 (stack)
+
+
+Стање 8
+
+   20 flowcontrol: _CMP . input _COMMA input
+
+    _REGISTER  помера, и иде на стање 35
+    _CONSTANT  помера, и иде на стање 36
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _ADDRESS   помера, и иде на стање 39
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 42
+    input   иде на стање 46
+
+
+Стање 9
+
+   21 flowcontrol: _JMP . label
+
+    _LABEL  помера, и иде на стање 38
+
+    label  иде на стање 47
+
+
+Стање 10
+
+   22 flowcontrol: _JEQ . label
+
+    _LABEL  помера, и иде на стање 38
+
+    label  иде на стање 48
+
+
+Стање 11
+
+   23 flowcontrol: _JNE . label
+
+    _LABEL  помера, и иде на стање 38
+
+    label  иде на стање 49
+
+
+Стање 12
+
+   24 flowcontrol: _JGT . label
+
+    _LABEL  помера, и иде на стање 38
+
+    label  иде на стање 50
+
+
+Стање 13
+
+   25 flowcontrol: _JLT . label
+
+    _LABEL  помера, и иде на стање 38
+
+    label  иде на стање 51
+
+
+Стање 14
+
+   26 flowcontrol: _JGE . label
+
+    _LABEL  помера, и иде на стање 38
+
+    label  иде на стање 52
+
+
+Стање 15
+
+   27 flowcontrol: _JLE . label
+
+    _LABEL  помера, и иде на стање 38
+
+    label  иде на стање 53
+
+
+Стање 16
+
+   28 flowcontrol: _JC . label
+
+    _LABEL  помера, и иде на стање 38
+
+    label  иде на стање 54
+
+
+Стање 17
+
+   29 flowcontrol: _JNC . label
+
+    _LABEL  помера, и иде на стање 38
+
+    label  иде на стање 55
+
+
+Стање 18
+
+   30 flowcontrol: _JO . label
+
+    _LABEL  помера, и иде на стање 38
+
+    label  иде на стање 56
+
+
+Стање 19
+
+   31 flowcontrol: _JNO . label
+
+    _LABEL  помера, и иде на стање 38
+
+    label  иде на стање 57
+
+
+Стање 20
+
+   15 arithmetic: _ADD . input _COMMA input _COMMA output
+
+    _REGISTER  помера, и иде на стање 35
+    _CONSTANT  помера, и иде на стање 36
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _ADDRESS   помера, и иде на стање 39
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 42
+    input   иде на стање 58
+
+
+Стање 21
+
+   16 arithmetic: _SUB . input _COMMA input _COMMA output
+
+    _REGISTER  помера, и иде на стање 35
+    _CONSTANT  помера, и иде на стање 36
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _ADDRESS   помера, и иде на стање 39
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 42
+    input   иде на стање 59
+
+
+Стање 22
+
+   17 arithmetic: _MUL . input _COMMA input _COMMA output
+
+    _REGISTER  помера, и иде на стање 35
+    _CONSTANT  помера, и иде на стање 36
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _ADDRESS   помера, и иде на стање 39
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 42
+    input   иде на стање 60
+
+
+Стање 23
+
+   18 arithmetic: _DIV . input _COMMA input _COMMA output
+
+    _REGISTER  помера, и иде на стање 35
+    _CONSTANT  помера, и иде на стање 36
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _ADDRESS   помера, и иде на стање 39
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 42
+    input   иде на стање 61
+
+
+Стање 24
+
+   19 arithmetic: _MOV . input _COMMA output
+
+    _REGISTER  помера, и иде на стање 35
+    _CONSTANT  помера, и иде на стање 36
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _ADDRESS   помера, и иде на стање 39
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 42
+    input   иде на стање 62
+
+
+Стање 25
+
+   14 asm_line: _HALT .
+
+    $основно  смањује користећи правило 14 (asm_line)
+
+
+Стање 26
+
+    5 variable: _LABEL_DEF . @1 _WORD _NUMBER
+   10 label_def: _LABEL_DEF .
+
+    _WORD            смањује користећи правило 4 (@1)
+    $основно  смањује користећи правило 10 (label_def)
+
+    @1  иде на стање 63
+
+
+Стање 27
+
+    3 variable_list: variable_list variable .
+
+    $основно  смањује користећи правило 3 (variable_list)
+
+
+Стање 28
+
+    1 program: variable_list code_list .
+    7 code_list: code_list . code_line
+
+    _PUSH       помера, и иде на стање 4
+    _POP        помера, и иде на стање 5
+    _CALL       помера, и иде на стање 6
+    _RET        помера, и иде на стање 7
+    _CMP        помера, и иде на стање 8
+    _JMP        помера, и иде на стање 9
+    _JEQ        помера, и иде на стање 10
+    _JNE        помера, и иде на стање 11
+    _JGT        помера, и иде на стање 12
+    _JLT        помера, и иде на стање 13
+    _JGE        помера, и иде на стање 14
+    _JLE        помера, и иде на стање 15
+    _JC         помера, и иде на стање 16
+    _JNC        помера, и иде на стање 17
+    _JO         помера, и иде на стање 18
+    _JNO        помера, и иде на стање 19
+    _ADD        помера, и иде на стање 20
+    _SUB        помера, и иде на стање 21
+    _MUL        помера, и иде на стање 22
+    _DIV        помера, и иде на стање 23
+    _MOV        помера, и иде на стање 24
+    _HALT       помера, и иде на стање 25
+    _LABEL_DEF  помера, и иде на стање 64
+
+    $основно  смањује користећи правило 1 (program)
+
+    code_line    иде на стање 65
+    label_def    иде на стање 30
+    asm_line     иде на стање 31
+    arithmetic   иде на стање 32
+    flowcontrol  иде на стање 33
+    stack        иде на стање 34
+
+
+Стање 29
+
+    6 code_list: code_line .
+
+    $основно  смањује користећи правило 6 (code_list)
+
+
+Стање 30
+
+    8 code_line: label_def .
+
+    $основно  смањује користећи правило 8 (code_line)
+
+
+Стање 31
+
+    9 code_line: asm_line .
+
+    $основно  смањује користећи правило 9 (code_line)
+
+
+Стање 32
+
+   11 asm_line: arithmetic .
+
+    $основно  смањује користећи правило 11 (asm_line)
+
+
+Стање 33
+
+   12 asm_line: flowcontrol .
+
+    $основно  смањује користећи правило 12 (asm_line)
+
+
+Стање 34
+
+   13 asm_line: stack .
+
+    $основно  смањује користећи правило 13 (asm_line)
+
+
+Стање 35
+
+   37 output: _REGISTER .
+
+    $основно  смањује користећи правило 37 (output)
+
+
+Стање 36
+
+   41 input: _CONSTANT .
+
+    $основно  смањује користећи правило 41 (input)
+
+
+Стање 37
+
+   38 output: _NUMBER . _LPAREN _REGISTER _RPAREN
+
+    _LPAREN  помера, и иде на стање 66
+
+
+Стање 38
+
+   36 label: _LABEL .
+
+    $основно  смањује користећи правило 36 (label)
+
+
+Стање 39
+
+   42 input: _ADDRESS .
+
+    $основно  смањује користећи правило 42 (input)
+
+
+Стање 40
+
+   39 output: _LPAREN . _REGISTER _RPAREN
+
+    _REGISTER  помера, и иде на стање 67
+
+
+Стање 41
+
+   40 output: label .
+
+    $основно  смањује користећи правило 40 (output)
+
+
+Стање 42
+
+   43 input: output .
+
+    $основно  смањује користећи правило 43 (input)
+
+
+Стање 43
+
+   32 stack: _PUSH input .
+
+    $основно  смањује користећи правило 32 (stack)
+
+
+Стање 44
+
+   33 stack: _POP output .
+
+    $основно  смањује користећи правило 33 (stack)
+
+
+Стање 45
+
+   34 stack: _CALL label .
+
+    $основно  смањује користећи правило 34 (stack)
+
+
+Стање 46
+
+   20 flowcontrol: _CMP input . _COMMA input
+
+    _COMMA  помера, и иде на стање 68
+
+
+Стање 47
+
+   21 flowcontrol: _JMP label .
+
+    $основно  смањује користећи правило 21 (flowcontrol)
+
+
+Стање 48
+
+   22 flowcontrol: _JEQ label .
+
+    $основно  смањује користећи правило 22 (flowcontrol)
+
+
+Стање 49
+
+   23 flowcontrol: _JNE label .
+
+    $основно  смањује користећи правило 23 (flowcontrol)
+
+
+Стање 50
+
+   24 flowcontrol: _JGT label .
+
+    $основно  смањује користећи правило 24 (flowcontrol)
+
+
+Стање 51
+
+   25 flowcontrol: _JLT label .
+
+    $основно  смањује користећи правило 25 (flowcontrol)
+
+
+Стање 52
+
+   26 flowcontrol: _JGE label .
+
+    $основно  смањује користећи правило 26 (flowcontrol)
+
+
+Стање 53
+
+   27 flowcontrol: _JLE label .
+
+    $основно  смањује користећи правило 27 (flowcontrol)
+
+
+Стање 54
+
+   28 flowcontrol: _JC label .
+
+    $основно  смањује користећи правило 28 (flowcontrol)
+
+
+Стање 55
+
+   29 flowcontrol: _JNC label .
+
+    $основно  смањује користећи правило 29 (flowcontrol)
+
+
+Стање 56
+
+   30 flowcontrol: _JO label .
+
+    $основно  смањује користећи правило 30 (flowcontrol)
+
+
+Стање 57
+
+   31 flowcontrol: _JNO label .
+
+    $основно  смањује користећи правило 31 (flowcontrol)
+
+
+Стање 58
+
+   15 arithmetic: _ADD input . _COMMA input _COMMA output
+
+    _COMMA  помера, и иде на стање 69
+
+
+Стање 59
+
+   16 arithmetic: _SUB input . _COMMA input _COMMA output
+
+    _COMMA  помера, и иде на стање 70
+
+
+Стање 60
+
+   17 arithmetic: _MUL input . _COMMA input _COMMA output
+
+    _COMMA  помера, и иде на стање 71
+
+
+Стање 61
+
+   18 arithmetic: _DIV input . _COMMA input _COMMA output
+
+    _COMMA  помера, и иде на стање 72
+
+
+Стање 62
+
+   19 arithmetic: _MOV input . _COMMA output
+
+    _COMMA  помера, и иде на стање 73
+
+
+Стање 63
+
+    5 variable: _LABEL_DEF @1 . _WORD _NUMBER
+
+    _WORD  помера, и иде на стање 74
+
+
+Стање 64
+
+   10 label_def: _LABEL_DEF .
+
+    $основно  смањује користећи правило 10 (label_def)
+
+
+Стање 65
+
+    7 code_list: code_list code_line .
+
+    $основно  смањује користећи правило 7 (code_list)
+
+
+Стање 66
+
+   38 output: _NUMBER _LPAREN . _REGISTER _RPAREN
+
+    _REGISTER  помера, и иде на стање 75
+
+
+Стање 67
+
+   39 output: _LPAREN _REGISTER . _RPAREN
+
+    _RPAREN  помера, и иде на стање 76
+
+
+Стање 68
+
+   20 flowcontrol: _CMP input _COMMA . input
+
+    _REGISTER  помера, и иде на стање 35
+    _CONSTANT  помера, и иде на стање 36
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _ADDRESS   помера, и иде на стање 39
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 42
+    input   иде на стање 77
+
+
+Стање 69
+
+   15 arithmetic: _ADD input _COMMA . input _COMMA output
+
+    _REGISTER  помера, и иде на стање 35
+    _CONSTANT  помера, и иде на стање 36
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _ADDRESS   помера, и иде на стање 39
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 42
+    input   иде на стање 78
+
+
+Стање 70
+
+   16 arithmetic: _SUB input _COMMA . input _COMMA output
+
+    _REGISTER  помера, и иде на стање 35
+    _CONSTANT  помера, и иде на стање 36
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _ADDRESS   помера, и иде на стање 39
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 42
+    input   иде на стање 79
+
+
+Стање 71
+
+   17 arithmetic: _MUL input _COMMA . input _COMMA output
+
+    _REGISTER  помера, и иде на стање 35
+    _CONSTANT  помера, и иде на стање 36
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _ADDRESS   помера, и иде на стање 39
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 42
+    input   иде на стање 80
+
+
+Стање 72
+
+   18 arithmetic: _DIV input _COMMA . input _COMMA output
+
+    _REGISTER  помера, и иде на стање 35
+    _CONSTANT  помера, и иде на стање 36
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _ADDRESS   помера, и иде на стање 39
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 42
+    input   иде на стање 81
+
+
+Стање 73
+
+   19 arithmetic: _MOV input _COMMA . output
+
+    _REGISTER  помера, и иде на стање 35
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 82
+
+
+Стање 74
+
+    5 variable: _LABEL_DEF @1 _WORD . _NUMBER
+
+    _NUMBER  помера, и иде на стање 83
+
+
+Стање 75
+
+   38 output: _NUMBER _LPAREN _REGISTER . _RPAREN
+
+    _RPAREN  помера, и иде на стање 84
+
+
+Стање 76
+
+   39 output: _LPAREN _REGISTER _RPAREN .
+
+    $основно  смањује користећи правило 39 (output)
+
+
+Стање 77
+
+   20 flowcontrol: _CMP input _COMMA input .
+
+    $основно  смањује користећи правило 20 (flowcontrol)
+
+
+Стање 78
+
+   15 arithmetic: _ADD input _COMMA input . _COMMA output
+
+    _COMMA  помера, и иде на стање 85
+
+
+Стање 79
+
+   16 arithmetic: _SUB input _COMMA input . _COMMA output
+
+    _COMMA  помера, и иде на стање 86
+
+
+Стање 80
+
+   17 arithmetic: _MUL input _COMMA input . _COMMA output
+
+    _COMMA  помера, и иде на стање 87
+
+
+Стање 81
+
+   18 arithmetic: _DIV input _COMMA input . _COMMA output
+
+    _COMMA  помера, и иде на стање 88
+
+
+Стање 82
+
+   19 arithmetic: _MOV input _COMMA output .
+
+    $основно  смањује користећи правило 19 (arithmetic)
+
+
+Стање 83
+
+    5 variable: _LABEL_DEF @1 _WORD _NUMBER .
+
+    $основно  смањује користећи правило 5 (variable)
+
+
+Стање 84
+
+   38 output: _NUMBER _LPAREN _REGISTER _RPAREN .
+
+    $основно  смањује користећи правило 38 (output)
+
+
+Стање 85
+
+   15 arithmetic: _ADD input _COMMA input _COMMA . output
+
+    _REGISTER  помера, и иде на стање 35
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 89
+
+
+Стање 86
+
+   16 arithmetic: _SUB input _COMMA input _COMMA . output
+
+    _REGISTER  помера, и иде на стање 35
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 90
+
+
+Стање 87
+
+   17 arithmetic: _MUL input _COMMA input _COMMA . output
+
+    _REGISTER  помера, и иде на стање 35
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 91
+
+
+Стање 88
+
+   18 arithmetic: _DIV input _COMMA input _COMMA . output
+
+    _REGISTER  помера, и иде на стање 35
+    _NUMBER    помера, и иде на стање 37
+    _LABEL     помера, и иде на стање 38
+    _LPAREN    помера, и иде на стање 40
+
+    label   иде на стање 41
+    output  иде на стање 92
+
+
+Стање 89
+
+   15 arithmetic: _ADD input _COMMA input _COMMA output .
+
+    $основно  смањује користећи правило 15 (arithmetic)
+
+
+Стање 90
+
+   16 arithmetic: _SUB input _COMMA input _COMMA output .
+
+    $основно  смањује користећи правило 16 (arithmetic)
+
+
+Стање 91
+
+   17 arithmetic: _MUL input _COMMA input _COMMA output .
+
+    $основно  смањује користећи правило 17 (arithmetic)
+
+
+Стање 92
+
+   18 arithmetic: _DIV input _COMMA input _COMMA output .
+
+    $основно  смањује користећи правило 18 (arithmetic)

@@ -1,0 +1,19 @@
+//OPIS:Ugnjezdeni loop
+//RETURN: 20
+function int main(){
+	int a = 3;
+	int b = 3;
+	<!- loop -!>
+	{
+		a = a + 3;			
+		a++;				
+		<!- loop -!>
+		{
+			b = b + 1;		
+			b++;
+		}
+		<!- puka manawa ( b > 5) hopau loop -!>;
+	}
+	<!- puka manawa (a > 10) hopau loop -!>; 
+	return a + b;
+}

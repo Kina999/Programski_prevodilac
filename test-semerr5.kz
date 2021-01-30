@@ -1,0 +1,5 @@
+//OPIS:Void kao tip promjenljive
+function int main(){
+	void a;
+	return 0;
+}

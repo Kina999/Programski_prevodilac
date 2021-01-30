@@ -1,0 +1,5 @@
+//OPIS: not same type func and return
+
+function int foo2(int p, unsigned int b, unsigned int c){
+	return c;
+}

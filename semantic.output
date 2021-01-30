@@ -1,0 +1,2036 @@
+Основа
+
+    0 $accept: program $end
+
+    1 $@1: %empty
+
+    2 program: globals $@1 function_list
+
+    3 globals: %empty
+
+    4 $@2: %empty
+
+    5 globals: globals TYPE ID $@2 m SEMI
+
+    6 m: %empty
+    7  | EQ_OP literal
+
+    8 function_list: function
+    9              | function_list function
+
+   10 $@3: %empty
+
+   11 function: FUNC TYPE ID $@3 LBRA parametri RBRA body
+
+   12 parametri: %empty
+   13          | xx
+
+   14 xx: TYPE ID
+   15   | xx COMMA TYPE ID
+
+   16 $@4: %empty
+
+   17 $@5: %empty
+
+   18 body: LCURLYBRA variable_list $@4 statement_list $@5 RCURLYBRA
+
+   19 variable_list: %empty
+   20              | variable_list variable_decl
+
+   21 $@6: %empty
+
+   22 variable_decl: TYPE $@6 more SEMI
+
+   23 $@7: %empty
+
+   24 more: ID $@7 x
+
+   25 $@8: %empty
+
+   26 more: more COMMA ID $@8 x
+
+   27 x: %empty
+   28  | EQ_OP literal
+
+   29 statement_list: %empty
+   30               | statement_list statement
+
+   31 statement: compound_statement
+   32          | assignment_statement
+   33          | if_else
+   34          | increment
+   35          | decrement
+   36          | void_call SEMI
+   37          | loop
+   38          | check
+   39          | return
+
+   40 $@9: %empty
+
+   41 check: CHECK LBRA ID $@9 RBRA LCURLYBRA check_body otherwise_part RCURLYBRA
+
+   42 $@10: %empty
+
+   43 check_body: WHEN literal EC $@10 statement break_part
+
+   44 $@11: %empty
+
+   45 check_body: check_body WHEN literal EC $@11 statement break_part
+
+   46 break_part: %empty
+
+   47 $@12: %empty
+
+   48 break_part: BREAK $@12 SEMI
+
+   49 otherwise_part: %empty
+
+   50 $@13: %empty
+
+   51 otherwise_part: OTHERWISE EC $@13 assignment_statement
+
+   52 $@14: %empty
+
+   53 void_call: ID $@14 LBRA argument RBRA
+
+   54 @15: %empty
+
+   55 $@16: %empty
+
+   56 loop: LOOPL LOOP LOOPR @15 LCURLYBRA statement_list RCURLYBRA LOOPL PUKA MANAWA LBRA rel_exp $@16 RBRA HOPAU LOOP LOOPR SEMI
+
+   57 decrement: ID DEC SEMI
+
+   58 increment: ID INC SEMI
+
+   59 compound_statement: LCURLYBRA statement_list RCURLYBRA
+
+   60 assignment_statement: ID EQ_OP exp SEMI
+
+   61 exp: ex
+   62    | exp ADD_SUB ex
+
+   63 $@17: %empty
+
+   64 condition_exp: LBRA rel_exp $@17 RBRA QM iz DT iz
+
+   65 iz: ID
+   66   | literal
+
+   67 ex: literal
+   68   | condition_exp
+
+   69 $@18: %empty
+
+   70 ex: ID $@18 ix
+   71   | function_call
+   72   | LBRA exp RBRA
+
+   73 ix: %empty
+   74   | ids
+   75   | decs
+
+   76 decs: DEC
+
+   77 ids: INC
+
+   78 literal: INUM
+   79        | UINUM
+
+   80 $@19: %empty
+
+   81 function_call: ID $@19 LBRA argument RBRA
+
+   82 argument: %empty
+   83         | lit
+
+   84 lit: exp
+   85    | lit COMMA exp
+
+   86 if_else: if_part
+
+   87 $@20: %empty
+
+   88 if_else: if_part ELSE $@20 statement
+
+   89 @21: %empty
+
+   90 $@22: %empty
+
+   91 $@23: %empty
+
+   92 if_part: IF LBRA @21 rel_exp $@22 RBRA $@23 statement
+
+   93 rel_exp: exp REL_OP exp
+
+   94 return: RETURN SEMI
+   95       | RETURN exp SEMI
+
+
+Терминали, са правилима где се појављују
+
+    $end (0) 0
+    error (256)
+    FUNC (258) 11
+    LOOPL (259) 56
+    LOOPR (260) 56
+    LOOP (261) 56
+    PUKA (262) 56
+    MANAWA (263) 56
+    HOPAU (264) 56
+    CHECK (265) 41
+    WHEN (266) 43 45
+    BREAK (267) 48
+    OTHERWISE (268) 51
+    INUM <s> (269) 78
+    UINUM <s> (270) 79
+    RETURN (271) 94 95
+    TYPE <i> (272) 5 11 14 15 22
+    IF (273) 92
+    ELSE (274) 88
+    ID <s> (275) 5 11 14 15 24 26 41 53 57 58 60 65 70 81
+    EQ_OP (276) 7 28 60
+    REL_OP <i> (277) 93
+    ADD_SUB <i> (278) 62
+    LBRA (279) 11 41 53 56 64 72 81 92
+    RBRA (280) 11 41 53 56 64 72 81 92
+    LCURLYBRA (281) 18 41 56 59
+    RCURLYBRA (282) 18 41 56 59
+    SEMI (283) 5 22 36 48 56 57 58 60 94 95
+    COMMA (284) 15 26 85
+    INC (285) 58 77
+    DEC (286) 57 76
+    EC (287) 43 45 51
+    QM (288) 64
+    DT (289) 64
+    ONLY_IF (290)
+
+
+Нетерминали, са правилима где се појављују
+
+    $accept (36)
+        на лево: 0
+    program (37)
+        на лево: 2
+        на десно: 0
+    $@1 (38)
+        на лево: 1
+        на десно: 2
+    globals (39)
+        на лево: 3 5
+        на десно: 2 5
+    $@2 (40)
+        на лево: 4
+        на десно: 5
+    m (41)
+        на лево: 6 7
+        на десно: 5
+    function_list (42)
+        на лево: 8 9
+        на десно: 2 9
+    function (43)
+        на лево: 11
+        на десно: 8 9
+    $@3 (44)
+        на лево: 10
+        на десно: 11
+    parametri (45)
+        на лево: 12 13
+        на десно: 11
+    xx (46)
+        на лево: 14 15
+        на десно: 13 15
+    body (47)
+        на лево: 18
+        на десно: 11
+    $@4 (48)
+        на лево: 16
+        на десно: 18
+    $@5 (49)
+        на лево: 17
+        на десно: 18
+    variable_list (50)
+        на лево: 19 20
+        на десно: 18 20
+    variable_decl (51)
+        на лево: 22
+        на десно: 20
+    $@6 (52)
+        на лево: 21
+        на десно: 22
+    more (53)
+        на лево: 24 26
+        на десно: 22 26
+    $@7 (54)
+        на лево: 23
+        на десно: 24
+    $@8 (55)
+        на лево: 25
+        на десно: 26
+    x (56)
+        на лево: 27 28
+        на десно: 24 26
+    statement_list (57)
+        на лево: 29 30
+        на десно: 18 30 56 59
+    statement (58)
+        на лево: 31 32 33 34 35 36 37 38 39
+        на десно: 30 43 45 88 92
+    check (59)
+        на лево: 41
+        на десно: 38
+    $@9 (60)
+        на лево: 40
+        на десно: 41
+    check_body (61)
+        на лево: 43 45
+        на десно: 41 45
+    $@10 (62)
+        на лево: 42
+        на десно: 43
+    $@11 (63)
+        на лево: 44
+        на десно: 45
+    break_part (64)
+        на лево: 46 48
+        на десно: 43 45
+    $@12 (65)
+        на лево: 47
+        на десно: 48
+    otherwise_part (66)
+        на лево: 49 51
+        на десно: 41
+    $@13 (67)
+        на лево: 50
+        на десно: 51
+    void_call <i> (68)
+        на лево: 53
+        на десно: 36
+    $@14 (69)
+        на лево: 52
+        на десно: 53
+    loop <i> (70)
+        на лево: 56
+        на десно: 37
+    @15 (71)
+        на лево: 54
+        на десно: 56
+    $@16 (72)
+        на лево: 55
+        на десно: 56
+    decrement <i> (73)
+        на лево: 57
+        на десно: 35
+    increment <i> (74)
+        на лево: 58
+        на десно: 34
+    compound_statement (75)
+        на лево: 59
+        на десно: 31
+    assignment_statement <i> (76)
+        на лево: 60
+        на десно: 32 51
+    exp <i> (77)
+        на лево: 61 62
+        на десно: 60 62 72 84 85 93 95
+    condition_exp <i> (78)
+        на лево: 64
+        на десно: 68
+    $@17 (79)
+        на лево: 63
+        на десно: 64
+    iz <i> (80)
+        на лево: 65 66
+        на десно: 64
+    ex <i> (81)
+        на лево: 67 68 70 71 72
+        на десно: 61 62
+    $@18 (82)
+        на лево: 69
+        на десно: 70
+    ix (83)
+        на лево: 73 74 75
+        на десно: 70
+    decs (84)
+        на лево: 76
+        на десно: 75
+    ids (85)
+        на лево: 77
+        на десно: 74
+    literal <i> (86)
+        на лево: 78 79
+        на десно: 7 28 43 45 66 67
+    function_call <i> (87)
+        на лево: 81
+        на десно: 71
+    $@19 (88)
+        на лево: 80
+        на десно: 81
+    argument <i> (89)
+        на лево: 82 83
+        на десно: 53 81
+    lit <i> (90)
+        на лево: 84 85
+        на десно: 83 85
+    if_else (91)
+        на лево: 86 88
+        на десно: 33
+    $@20 (92)
+        на лево: 87
+        на десно: 88
+    if_part <i> (93)
+        на лево: 92
+        на десно: 86 88
+    @21 (94)
+        на лево: 89
+        на десно: 92
+    $@22 (95)
+        на лево: 90
+        на десно: 92
+    $@23 (96)
+        на лево: 91
+        на десно: 92
+    rel_exp <i> (97)
+        на лево: 93
+        на десно: 56 64 92
+    return <i> (98)
+        на лево: 94 95
+        на десно: 39
+
+
+Стање 0
+
+    0 $accept: . program $end
+
+    $основно  смањује користећи правило 3 (globals)
+
+    program  иде на стање 1
+    globals  иде на стање 2
+
+
+Стање 1
+
+    0 $accept: program . $end
+
+    $end  помера, и иде на стање 3
+
+
+Стање 2
+
+    2 program: globals . $@1 function_list
+    5 globals: globals . TYPE ID $@2 m SEMI
+
+    TYPE  помера, и иде на стање 4
+
+    $основно  смањује користећи правило 1 ($@1)
+
+    $@1  иде на стање 5
+
+
+Стање 3
+
+    0 $accept: program $end .
+
+    $основно  прихвата
+
+
+Стање 4
+
+    5 globals: globals TYPE . ID $@2 m SEMI
+
+    ID  помера, и иде на стање 6
+
+
+Стање 5
+
+    2 program: globals $@1 . function_list
+
+    FUNC  помера, и иде на стање 7
+
+    function_list  иде на стање 8
+    function       иде на стање 9
+
+
+Стање 6
+
+    5 globals: globals TYPE ID . $@2 m SEMI
+
+    $основно  смањује користећи правило 4 ($@2)
+
+    $@2  иде на стање 10
+
+
+Стање 7
+
+   11 function: FUNC . TYPE ID $@3 LBRA parametri RBRA body
+
+    TYPE  помера, и иде на стање 11
+
+
+Стање 8
+
+    2 program: globals $@1 function_list .
+    9 function_list: function_list . function
+
+    FUNC  помера, и иде на стање 7
+
+    $основно  смањује користећи правило 2 (program)
+
+    function  иде на стање 12
+
+
+Стање 9
+
+    8 function_list: function .
+
+    $основно  смањује користећи правило 8 (function_list)
+
+
+Стање 10
+
+    5 globals: globals TYPE ID $@2 . m SEMI
+
+    EQ_OP  помера, и иде на стање 13
+
+    $основно  смањује користећи правило 6 (m)
+
+    m  иде на стање 14
+
+
+Стање 11
+
+   11 function: FUNC TYPE . ID $@3 LBRA parametri RBRA body
+
+    ID  помера, и иде на стање 15
+
+
+Стање 12
+
+    9 function_list: function_list function .
+
+    $основно  смањује користећи правило 9 (function_list)
+
+
+Стање 13
+
+    7 m: EQ_OP . literal
+
+    INUM   помера, и иде на стање 16
+    UINUM  помера, и иде на стање 17
+
+    literal  иде на стање 18
+
+
+Стање 14
+
+    5 globals: globals TYPE ID $@2 m . SEMI
+
+    SEMI  помера, и иде на стање 19
+
+
+Стање 15
+
+   11 function: FUNC TYPE ID . $@3 LBRA parametri RBRA body
+
+    $основно  смањује користећи правило 10 ($@3)
+
+    $@3  иде на стање 20
+
+
+Стање 16
+
+   78 literal: INUM .
+
+    $основно  смањује користећи правило 78 (literal)
+
+
+Стање 17
+
+   79 literal: UINUM .
+
+    $основно  смањује користећи правило 79 (literal)
+
+
+Стање 18
+
+    7 m: EQ_OP literal .
+
+    $основно  смањује користећи правило 7 (m)
+
+
+Стање 19
+
+    5 globals: globals TYPE ID $@2 m SEMI .
+
+    $основно  смањује користећи правило 5 (globals)
+
+
+Стање 20
+
+   11 function: FUNC TYPE ID $@3 . LBRA parametri RBRA body
+
+    LBRA  помера, и иде на стање 21
+
+
+Стање 21
+
+   11 function: FUNC TYPE ID $@3 LBRA . parametri RBRA body
+
+    TYPE  помера, и иде на стање 22
+
+    $основно  смањује користећи правило 12 (parametri)
+
+    parametri  иде на стање 23
+    xx         иде на стање 24
+
+
+Стање 22
+
+   14 xx: TYPE . ID
+
+    ID  помера, и иде на стање 25
+
+
+Стање 23
+
+   11 function: FUNC TYPE ID $@3 LBRA parametri . RBRA body
+
+    RBRA  помера, и иде на стање 26
+
+
+Стање 24
+
+   13 parametri: xx .
+   15 xx: xx . COMMA TYPE ID
+
+    COMMA  помера, и иде на стање 27
+
+    $основно  смањује користећи правило 13 (parametri)
+
+
+Стање 25
+
+   14 xx: TYPE ID .
+
+    $основно  смањује користећи правило 14 (xx)
+
+
+Стање 26
+
+   11 function: FUNC TYPE ID $@3 LBRA parametri RBRA . body
+
+    LCURLYBRA  помера, и иде на стање 28
+
+    body  иде на стање 29
+
+
+Стање 27
+
+   15 xx: xx COMMA . TYPE ID
+
+    TYPE  помера, и иде на стање 30
+
+
+Стање 28
+
+   18 body: LCURLYBRA . variable_list $@4 statement_list $@5 RCURLYBRA
+
+    $основно  смањује користећи правило 19 (variable_list)
+
+    variable_list  иде на стање 31
+
+
+Стање 29
+
+   11 function: FUNC TYPE ID $@3 LBRA parametri RBRA body .
+
+    $основно  смањује користећи правило 11 (function)
+
+
+Стање 30
+
+   15 xx: xx COMMA TYPE . ID
+
+    ID  помера, и иде на стање 32
+
+
+Стање 31
+
+   18 body: LCURLYBRA variable_list . $@4 statement_list $@5 RCURLYBRA
+   20 variable_list: variable_list . variable_decl
+
+    TYPE  помера, и иде на стање 33
+
+    $основно  смањује користећи правило 16 ($@4)
+
+    $@4            иде на стање 34
+    variable_decl  иде на стање 35
+
+
+Стање 32
+
+   15 xx: xx COMMA TYPE ID .
+
+    $основно  смањује користећи правило 15 (xx)
+
+
+Стање 33
+
+   22 variable_decl: TYPE . $@6 more SEMI
+
+    $основно  смањује користећи правило 21 ($@6)
+
+    $@6  иде на стање 36
+
+
+Стање 34
+
+   18 body: LCURLYBRA variable_list $@4 . statement_list $@5 RCURLYBRA
+
+    $основно  смањује користећи правило 29 (statement_list)
+
+    statement_list  иде на стање 37
+
+
+Стање 35
+
+   20 variable_list: variable_list variable_decl .
+
+    $основно  смањује користећи правило 20 (variable_list)
+
+
+Стање 36
+
+   22 variable_decl: TYPE $@6 . more SEMI
+
+    ID  помера, и иде на стање 38
+
+    more  иде на стање 39
+
+
+Стање 37
+
+   18 body: LCURLYBRA variable_list $@4 statement_list . $@5 RCURLYBRA
+   30 statement_list: statement_list . statement
+
+    LOOPL      помера, и иде на стање 40
+    CHECK      помера, и иде на стање 41
+    RETURN     помера, и иде на стање 42
+    IF         помера, и иде на стање 43
+    ID         помера, и иде на стање 44
+    LCURLYBRA  помера, и иде на стање 45
+
+    $основно  смањује користећи правило 17 ($@5)
+
+    $@5                   иде на стање 46
+    statement             иде на стање 47
+    check                 иде на стање 48
+    void_call             иде на стање 49
+    loop                  иде на стање 50
+    decrement             иде на стање 51
+    increment             иде на стање 52
+    compound_statement    иде на стање 53
+    assignment_statement  иде на стање 54
+    if_else               иде на стање 55
+    if_part               иде на стање 56
+    return                иде на стање 57
+
+
+Стање 38
+
+   24 more: ID . $@7 x
+
+    $основно  смањује користећи правило 23 ($@7)
+
+    $@7  иде на стање 58
+
+
+Стање 39
+
+   22 variable_decl: TYPE $@6 more . SEMI
+   26 more: more . COMMA ID $@8 x
+
+    SEMI   помера, и иде на стање 59
+    COMMA  помера, и иде на стање 60
+
+
+Стање 40
+
+   56 loop: LOOPL . LOOP LOOPR @15 LCURLYBRA statement_list RCURLYBRA LOOPL PUKA MANAWA LBRA rel_exp $@16 RBRA HOPAU LOOP LOOPR SEMI
+
+    LOOP  помера, и иде на стање 61
+
+
+Стање 41
+
+   41 check: CHECK . LBRA ID $@9 RBRA LCURLYBRA check_body otherwise_part RCURLYBRA
+
+    LBRA  помера, и иде на стање 62
+
+
+Стање 42
+
+   94 return: RETURN . SEMI
+   95       | RETURN . exp SEMI
+
+    INUM   помера, и иде на стање 16
+    UINUM  помера, и иде на стање 17
+    ID     помера, и иде на стање 63
+    LBRA   помера, и иде на стање 64
+    SEMI   помера, и иде на стање 65
+
+    exp            иде на стање 66
+    condition_exp  иде на стање 67
+    ex             иде на стање 68
+    literal        иде на стање 69
+    function_call  иде на стање 70
+
+
+Стање 43
+
+   92 if_part: IF . LBRA @21 rel_exp $@22 RBRA $@23 statement
+
+    LBRA  помера, и иде на стање 71
+
+
+Стање 44
+
+   53 void_call: ID . $@14 LBRA argument RBRA
+   57 decrement: ID . DEC SEMI
+   58 increment: ID . INC SEMI
+   60 assignment_statement: ID . EQ_OP exp SEMI
+
+    EQ_OP  помера, и иде на стање 72
+    INC    помера, и иде на стање 73
+    DEC    помера, и иде на стање 74
+
+    $основно  смањује користећи правило 52 ($@14)
+
+    $@14  иде на стање 75
+
+
+Стање 45
+
+   59 compound_statement: LCURLYBRA . statement_list RCURLYBRA
+
+    $основно  смањује користећи правило 29 (statement_list)
+
+    statement_list  иде на стање 76
+
+
+Стање 46
+
+   18 body: LCURLYBRA variable_list $@4 statement_list $@5 . RCURLYBRA
+
+    RCURLYBRA  помера, и иде на стање 77
+
+
+Стање 47
+
+   30 statement_list: statement_list statement .
+
+    $основно  смањује користећи правило 30 (statement_list)
+
+
+Стање 48
+
+   38 statement: check .
+
+    $основно  смањује користећи правило 38 (statement)
+
+
+Стање 49
+
+   36 statement: void_call . SEMI
+
+    SEMI  помера, и иде на стање 78
+
+
+Стање 50
+
+   37 statement: loop .
+
+    $основно  смањује користећи правило 37 (statement)
+
+
+Стање 51
+
+   35 statement: decrement .
+
+    $основно  смањује користећи правило 35 (statement)
+
+
+Стање 52
+
+   34 statement: increment .
+
+    $основно  смањује користећи правило 34 (statement)
+
+
+Стање 53
+
+   31 statement: compound_statement .
+
+    $основно  смањује користећи правило 31 (statement)
+
+
+Стање 54
+
+   32 statement: assignment_statement .
+
+    $основно  смањује користећи правило 32 (statement)
+
+
+Стање 55
+
+   33 statement: if_else .
+
+    $основно  смањује користећи правило 33 (statement)
+
+
+Стање 56
+
+   86 if_else: if_part .
+   88        | if_part . ELSE $@20 statement
+
+    ELSE  помера, и иде на стање 79
+
+    $основно  смањује користећи правило 86 (if_else)
+
+
+Стање 57
+
+   39 statement: return .
+
+    $основно  смањује користећи правило 39 (statement)
+
+
+Стање 58
+
+   24 more: ID $@7 . x
+
+    EQ_OP  помера, и иде на стање 80
+
+    $основно  смањује користећи правило 27 (x)
+
+    x  иде на стање 81
+
+
+Стање 59
+
+   22 variable_decl: TYPE $@6 more SEMI .
+
+    $основно  смањује користећи правило 22 (variable_decl)
+
+
+Стање 60
+
+   26 more: more COMMA . ID $@8 x
+
+    ID  помера, и иде на стање 82
+
+
+Стање 61
+
+   56 loop: LOOPL LOOP . LOOPR @15 LCURLYBRA statement_list RCURLYBRA LOOPL PUKA MANAWA LBRA rel_exp $@16 RBRA HOPAU LOOP LOOPR SEMI
+
+    LOOPR  помера, и иде на стање 83
+
+
+Стање 62
+
+   41 check: CHECK LBRA . ID $@9 RBRA LCURLYBRA check_body otherwise_part RCURLYBRA
+
+    ID  помера, и иде на стање 84
+
+
+Стање 63
+
+   70 ex: ID . $@18 ix
+   81 function_call: ID . $@19 LBRA argument RBRA
+
+    LBRA             смањује користећи правило 80 ($@19)
+    $основно  смањује користећи правило 69 ($@18)
+
+    $@18  иде на стање 85
+    $@19  иде на стање 86
+
+
+Стање 64
+
+   64 condition_exp: LBRA . rel_exp $@17 RBRA QM iz DT iz
+   72 ex: LBRA . exp RBRA
+
+    INUM   помера, и иде на стање 16
+    UINUM  помера, и иде на стање 17
+    ID     помера, и иде на стање 63
+    LBRA   помера, и иде на стање 64
+
+    exp            иде на стање 87
+    condition_exp  иде на стање 67
+    ex             иде на стање 68
+    literal        иде на стање 69
+    function_call  иде на стање 70
+    rel_exp        иде на стање 88
+
+
+Стање 65
+
+   94 return: RETURN SEMI .
+
+    $основно  смањује користећи правило 94 (return)
+
+
+Стање 66
+
+   62 exp: exp . ADD_SUB ex
+   95 return: RETURN exp . SEMI
+
+    ADD_SUB  помера, и иде на стање 89
+    SEMI     помера, и иде на стање 90
+
+
+Стање 67
+
+   68 ex: condition_exp .
+
+    $основно  смањује користећи правило 68 (ex)
+
+
+Стање 68
+
+   61 exp: ex .
+
+    $основно  смањује користећи правило 61 (exp)
+
+
+Стање 69
+
+   67 ex: literal .
+
+    $основно  смањује користећи правило 67 (ex)
+
+
+Стање 70
+
+   71 ex: function_call .
+
+    $основно  смањује користећи правило 71 (ex)
+
+
+Стање 71
+
+   92 if_part: IF LBRA . @21 rel_exp $@22 RBRA $@23 statement
+
+    $основно  смањује користећи правило 89 (@21)
+
+    @21  иде на стање 91
+
+
+Стање 72
+
+   60 assignment_statement: ID EQ_OP . exp SEMI
+
+    INUM   помера, и иде на стање 16
+    UINUM  помера, и иде на стање 17
+    ID     помера, и иде на стање 63
+    LBRA   помера, и иде на стање 64
+
+    exp            иде на стање 92
+    condition_exp  иде на стање 67
+    ex             иде на стање 68
+    literal        иде на стање 69
+    function_call  иде на стање 70
+
+
+Стање 73
+
+   58 increment: ID INC . SEMI
+
+    SEMI  помера, и иде на стање 93
+
+
+Стање 74
+
+   57 decrement: ID DEC . SEMI
+
+    SEMI  помера, и иде на стање 94
+
+
+Стање 75
+
+   53 void_call: ID $@14 . LBRA argument RBRA
+
+    LBRA  помера, и иде на стање 95
+
+
+Стање 76
+
+   30 statement_list: statement_list . statement
+   59 compound_statement: LCURLYBRA statement_list . RCURLYBRA
+
+    LOOPL      помера, и иде на стање 40
+    CHECK      помера, и иде на стање 41
+    RETURN     помера, и иде на стање 42
+    IF         помера, и иде на стање 43
+    ID         помера, и иде на стање 44
+    LCURLYBRA  помера, и иде на стање 45
+    RCURLYBRA  помера, и иде на стање 96
+
+    statement             иде на стање 47
+    check                 иде на стање 48
+    void_call             иде на стање 49
+    loop                  иде на стање 50
+    decrement             иде на стање 51
+    increment             иде на стање 52
+    compound_statement    иде на стање 53
+    assignment_statement  иде на стање 54
+    if_else               иде на стање 55
+    if_part               иде на стање 56
+    return                иде на стање 57
+
+
+Стање 77
+
+   18 body: LCURLYBRA variable_list $@4 statement_list $@5 RCURLYBRA .
+
+    $основно  смањује користећи правило 18 (body)
+
+
+Стање 78
+
+   36 statement: void_call SEMI .
+
+    $основно  смањује користећи правило 36 (statement)
+
+
+Стање 79
+
+   88 if_else: if_part ELSE . $@20 statement
+
+    $основно  смањује користећи правило 87 ($@20)
+
+    $@20  иде на стање 97
+
+
+Стање 80
+
+   28 x: EQ_OP . literal
+
+    INUM   помера, и иде на стање 16
+    UINUM  помера, и иде на стање 17
+
+    literal  иде на стање 98
+
+
+Стање 81
+
+   24 more: ID $@7 x .
+
+    $основно  смањује користећи правило 24 (more)
+
+
+Стање 82
+
+   26 more: more COMMA ID . $@8 x
+
+    $основно  смањује користећи правило 25 ($@8)
+
+    $@8  иде на стање 99
+
+
+Стање 83
+
+   56 loop: LOOPL LOOP LOOPR . @15 LCURLYBRA statement_list RCURLYBRA LOOPL PUKA MANAWA LBRA rel_exp $@16 RBRA HOPAU LOOP LOOPR SEMI
+
+    $основно  смањује користећи правило 54 (@15)
+
+    @15  иде на стање 100
+
+
+Стање 84
+
+   41 check: CHECK LBRA ID . $@9 RBRA LCURLYBRA check_body otherwise_part RCURLYBRA
+
+    $основно  смањује користећи правило 40 ($@9)
+
+    $@9  иде на стање 101
+
+
+Стање 85
+
+   70 ex: ID $@18 . ix
+
+    INC  помера, и иде на стање 102
+    DEC  помера, и иде на стање 103
+
+    $основно  смањује користећи правило 73 (ix)
+
+    ix    иде на стање 104
+    decs  иде на стање 105
+    ids   иде на стање 106
+
+
+Стање 86
+
+   81 function_call: ID $@19 . LBRA argument RBRA
+
+    LBRA  помера, и иде на стање 107
+
+
+Стање 87
+
+   62 exp: exp . ADD_SUB ex
+   72 ex: LBRA exp . RBRA
+   93 rel_exp: exp . REL_OP exp
+
+    REL_OP   помера, и иде на стање 108
+    ADD_SUB  помера, и иде на стање 89
+    RBRA     помера, и иде на стање 109
+
+
+Стање 88
+
+   64 condition_exp: LBRA rel_exp . $@17 RBRA QM iz DT iz
+
+    $основно  смањује користећи правило 63 ($@17)
+
+    $@17  иде на стање 110
+
+
+Стање 89
+
+   62 exp: exp ADD_SUB . ex
+
+    INUM   помера, и иде на стање 16
+    UINUM  помера, и иде на стање 17
+    ID     помера, и иде на стање 63
+    LBRA   помера, и иде на стање 64
+
+    condition_exp  иде на стање 67
+    ex             иде на стање 111
+    literal        иде на стање 69
+    function_call  иде на стање 70
+
+
+Стање 90
+
+   95 return: RETURN exp SEMI .
+
+    $основно  смањује користећи правило 95 (return)
+
+
+Стање 91
+
+   92 if_part: IF LBRA @21 . rel_exp $@22 RBRA $@23 statement
+
+    INUM   помера, и иде на стање 16
+    UINUM  помера, и иде на стање 17
+    ID     помера, и иде на стање 63
+    LBRA   помера, и иде на стање 64
+
+    exp            иде на стање 112
+    condition_exp  иде на стање 67
+    ex             иде на стање 68
+    literal        иде на стање 69
+    function_call  иде на стање 70
+    rel_exp        иде на стање 113
+
+
+Стање 92
+
+   60 assignment_statement: ID EQ_OP exp . SEMI
+   62 exp: exp . ADD_SUB ex
+
+    ADD_SUB  помера, и иде на стање 89
+    SEMI     помера, и иде на стање 114
+
+
+Стање 93
+
+   58 increment: ID INC SEMI .
+
+    $основно  смањује користећи правило 58 (increment)
+
+
+Стање 94
+
+   57 decrement: ID DEC SEMI .
+
+    $основно  смањује користећи правило 57 (decrement)
+
+
+Стање 95
+
+   53 void_call: ID $@14 LBRA . argument RBRA
+
+    INUM   помера, и иде на стање 16
+    UINUM  помера, и иде на стање 17
+    ID     помера, и иде на стање 63
+    LBRA   помера, и иде на стање 64
+
+    $основно  смањује користећи правило 82 (argument)
+
+    exp            иде на стање 115
+    condition_exp  иде на стање 67
+    ex             иде на стање 68
+    literal        иде на стање 69
+    function_call  иде на стање 70
+    argument       иде на стање 116
+    lit            иде на стање 117
+
+
+Стање 96
+
+   59 compound_statement: LCURLYBRA statement_list RCURLYBRA .
+
+    $основно  смањује користећи правило 59 (compound_statement)
+
+
+Стање 97
+
+   88 if_else: if_part ELSE $@20 . statement
+
+    LOOPL      помера, и иде на стање 40
+    CHECK      помера, и иде на стање 41
+    RETURN     помера, и иде на стање 42
+    IF         помера, и иде на стање 43
+    ID         помера, и иде на стање 44
+    LCURLYBRA  помера, и иде на стање 45
+
+    statement             иде на стање 118
+    check                 иде на стање 48
+    void_call             иде на стање 49
+    loop                  иде на стање 50
+    decrement             иде на стање 51
+    increment             иде на стање 52
+    compound_statement    иде на стање 53
+    assignment_statement  иде на стање 54
+    if_else               иде на стање 55
+    if_part               иде на стање 56
+    return                иде на стање 57
+
+
+Стање 98
+
+   28 x: EQ_OP literal .
+
+    $основно  смањује користећи правило 28 (x)
+
+
+Стање 99
+
+   26 more: more COMMA ID $@8 . x
+
+    EQ_OP  помера, и иде на стање 80
+
+    $основно  смањује користећи правило 27 (x)
+
+    x  иде на стање 119
+
+
+Стање 100
+
+   56 loop: LOOPL LOOP LOOPR @15 . LCURLYBRA statement_list RCURLYBRA LOOPL PUKA MANAWA LBRA rel_exp $@16 RBRA HOPAU LOOP LOOPR SEMI
+
+    LCURLYBRA  помера, и иде на стање 120
+
+
+Стање 101
+
+   41 check: CHECK LBRA ID $@9 . RBRA LCURLYBRA check_body otherwise_part RCURLYBRA
+
+    RBRA  помера, и иде на стање 121
+
+
+Стање 102
+
+   77 ids: INC .
+
+    $основно  смањује користећи правило 77 (ids)
+
+
+Стање 103
+
+   76 decs: DEC .
+
+    $основно  смањује користећи правило 76 (decs)
+
+
+Стање 104
+
+   70 ex: ID $@18 ix .
+
+    $основно  смањује користећи правило 70 (ex)
+
+
+Стање 105
+
+   75 ix: decs .
+
+    $основно  смањује користећи правило 75 (ix)
+
+
+Стање 106
+
+   74 ix: ids .
+
+    $основно  смањује користећи правило 74 (ix)
+
+
+Стање 107
+
+   81 function_call: ID $@19 LBRA . argument RBRA
+
+    INUM   помера, и иде на стање 16
+    UINUM  помера, и иде на стање 17
+    ID     помера, и иде на стање 63
+    LBRA   помера, и иде на стање 64
+
+    $основно  смањује користећи правило 82 (argument)
+
+    exp            иде на стање 115
+    condition_exp  иде на стање 67
+    ex             иде на стање 68
+    literal        иде на стање 69
+    function_call  иде на стање 70
+    argument       иде на стање 122
+    lit            иде на стање 117
+
+
+Стање 108
+
+   93 rel_exp: exp REL_OP . exp
+
+    INUM   помера, и иде на стање 16
+    UINUM  помера, и иде на стање 17
+    ID     помера, и иде на стање 63
+    LBRA   помера, и иде на стање 64
+
+    exp            иде на стање 123
+    condition_exp  иде на стање 67
+    ex             иде на стање 68
+    literal        иде на стање 69
+    function_call  иде на стање 70
+
+
+Стање 109
+
+   72 ex: LBRA exp RBRA .
+
+    $основно  смањује користећи правило 72 (ex)
+
+
+Стање 110
+
+   64 condition_exp: LBRA rel_exp $@17 . RBRA QM iz DT iz
+
+    RBRA  помера, и иде на стање 124
+
+
+Стање 111
+
+   62 exp: exp ADD_SUB ex .
+
+    $основно  смањује користећи правило 62 (exp)
+
+
+Стање 112
+
+   62 exp: exp . ADD_SUB ex
+   93 rel_exp: exp . REL_OP exp
+
+    REL_OP   помера, и иде на стање 108
+    ADD_SUB  помера, и иде на стање 89
+
+
+Стање 113
+
+   92 if_part: IF LBRA @21 rel_exp . $@22 RBRA $@23 statement
+
+    $основно  смањује користећи правило 90 ($@22)
+
+    $@22  иде на стање 125
+
+
+Стање 114
+
+   60 assignment_statement: ID EQ_OP exp SEMI .
+
+    $основно  смањује користећи правило 60 (assignment_statement)
+
+
+Стање 115
+
+   62 exp: exp . ADD_SUB ex
+   84 lit: exp .
+
+    ADD_SUB  помера, и иде на стање 89
+
+    $основно  смањује користећи правило 84 (lit)
+
+
+Стање 116
+
+   53 void_call: ID $@14 LBRA argument . RBRA
+
+    RBRA  помера, и иде на стање 126
+
+
+Стање 117
+
+   83 argument: lit .
+   85 lit: lit . COMMA exp
+
+    COMMA  помера, и иде на стање 127
+
+    $основно  смањује користећи правило 83 (argument)
+
+
+Стање 118
+
+   88 if_else: if_part ELSE $@20 statement .
+
+    $основно  смањује користећи правило 88 (if_else)
+
+
+Стање 119
+
+   26 more: more COMMA ID $@8 x .
+
+    $основно  смањује користећи правило 26 (more)
+
+
+Стање 120
+
+   56 loop: LOOPL LOOP LOOPR @15 LCURLYBRA . statement_list RCURLYBRA LOOPL PUKA MANAWA LBRA rel_exp $@16 RBRA HOPAU LOOP LOOPR SEMI
+
+    $основно  смањује користећи правило 29 (statement_list)
+
+    statement_list  иде на стање 128
+
+
+Стање 121
+
+   41 check: CHECK LBRA ID $@9 RBRA . LCURLYBRA check_body otherwise_part RCURLYBRA
+
+    LCURLYBRA  помера, и иде на стање 129
+
+
+Стање 122
+
+   81 function_call: ID $@19 LBRA argument . RBRA
+
+    RBRA  помера, и иде на стање 130
+
+
+Стање 123
+
+   62 exp: exp . ADD_SUB ex
+   93 rel_exp: exp REL_OP exp .
+
+    ADD_SUB  помера, и иде на стање 89
+
+    $основно  смањује користећи правило 93 (rel_exp)
+
+
+Стање 124
+
+   64 condition_exp: LBRA rel_exp $@17 RBRA . QM iz DT iz
+
+    QM  помера, и иде на стање 131
+
+
+Стање 125
+
+   92 if_part: IF LBRA @21 rel_exp $@22 . RBRA $@23 statement
+
+    RBRA  помера, и иде на стање 132
+
+
+Стање 126
+
+   53 void_call: ID $@14 LBRA argument RBRA .
+
+    $основно  смањује користећи правило 53 (void_call)
+
+
+Стање 127
+
+   85 lit: lit COMMA . exp
+
+    INUM   помера, и иде на стање 16
+    UINUM  помера, и иде на стање 17
+    ID     помера, и иде на стање 63
+    LBRA   помера, и иде на стање 64
+
+    exp            иде на стање 133
+    condition_exp  иде на стање 67
+    ex             иде на стање 68
+    literal        иде на стање 69
+    function_call  иде на стање 70
+
+
+Стање 128
+
+   30 statement_list: statement_list . statement
+   56 loop: LOOPL LOOP LOOPR @15 LCURLYBRA statement_list . RCURLYBRA LOOPL PUKA MANAWA LBRA rel_exp $@16 RBRA HOPAU LOOP LOOPR SEMI
+
+    LOOPL      помера, и иде на стање 40
+    CHECK      помера, и иде на стање 41
+    RETURN     помера, и иде на стање 42
+    IF         помера, и иде на стање 43
+    ID         помера, и иде на стање 44
+    LCURLYBRA  помера, и иде на стање 45
+    RCURLYBRA  помера, и иде на стање 134
+
+    statement             иде на стање 47
+    check                 иде на стање 48
+    void_call             иде на стање 49
+    loop                  иде на стање 50
+    decrement             иде на стање 51
+    increment             иде на стање 52
+    compound_statement    иде на стање 53
+    assignment_statement  иде на стање 54
+    if_else               иде на стање 55
+    if_part               иде на стање 56
+    return                иде на стање 57
+
+
+Стање 129
+
+   41 check: CHECK LBRA ID $@9 RBRA LCURLYBRA . check_body otherwise_part RCURLYBRA
+
+    WHEN  помера, и иде на стање 135
+
+    check_body  иде на стање 136
+
+
+Стање 130
+
+   81 function_call: ID $@19 LBRA argument RBRA .
+
+    $основно  смањује користећи правило 81 (function_call)
+
+
+Стање 131
+
+   64 condition_exp: LBRA rel_exp $@17 RBRA QM . iz DT iz
+
+    INUM   помера, и иде на стање 16
+    UINUM  помера, и иде на стање 17
+    ID     помера, и иде на стање 137
+
+    iz       иде на стање 138
+    literal  иде на стање 139
+
+
+Стање 132
+
+   92 if_part: IF LBRA @21 rel_exp $@22 RBRA . $@23 statement
+
+    $основно  смањује користећи правило 91 ($@23)
+
+    $@23  иде на стање 140
+
+
+Стање 133
+
+   62 exp: exp . ADD_SUB ex
+   85 lit: lit COMMA exp .
+
+    ADD_SUB  помера, и иде на стање 89
+
+    $основно  смањује користећи правило 85 (lit)
+
+
+Стање 134
+
+   56 loop: LOOPL LOOP LOOPR @15 LCURLYBRA statement_list RCURLYBRA . LOOPL PUKA MANAWA LBRA rel_exp $@16 RBRA HOPAU LOOP LOOPR SEMI
+
+    LOOPL  помера, и иде на стање 141
+
+
+Стање 135
+
+   43 check_body: WHEN . literal EC $@10 statement break_part
+
+    INUM   помера, и иде на стање 16
+    UINUM  помера, и иде на стање 17
+
+    literal  иде на стање 142
+
+
+Стање 136
+
+   41 check: CHECK LBRA ID $@9 RBRA LCURLYBRA check_body . otherwise_part RCURLYBRA
+   45 check_body: check_body . WHEN literal EC $@11 statement break_part
+
+    WHEN       помера, и иде на стање 143
+    OTHERWISE  помера, и иде на стање 144
+
+    $основно  смањује користећи правило 49 (otherwise_part)
+
+    otherwise_part  иде на стање 145
+
+
+Стање 137
+
+   65 iz: ID .
+
+    $основно  смањује користећи правило 65 (iz)
+
+
+Стање 138
+
+   64 condition_exp: LBRA rel_exp $@17 RBRA QM iz . DT iz
+
+    DT  помера, и иде на стање 146
+
+
+Стање 139
+
+   66 iz: literal .
+
+    $основно  смањује користећи правило 66 (iz)
+
+
+Стање 140
+
+   92 if_part: IF LBRA @21 rel_exp $@22 RBRA $@23 . statement
+
+    LOOPL      помера, и иде на стање 40
+    CHECK      помера, и иде на стање 41
+    RETURN     помера, и иде на стање 42
+    IF         помера, и иде на стање 43
+    ID         помера, и иде на стање 44
+    LCURLYBRA  помера, и иде на стање 45
+
+    statement             иде на стање 147
+    check                 иде на стање 48
+    void_call             иде на стање 49
+    loop                  иде на стање 50
+    decrement             иде на стање 51
+    increment             иде на стање 52
+    compound_statement    иде на стање 53
+    assignment_statement  иде на стање 54
+    if_else               иде на стање 55
+    if_part               иде на стање 56
+    return                иде на стање 57
+
+
+Стање 141
+
+   56 loop: LOOPL LOOP LOOPR @15 LCURLYBRA statement_list RCURLYBRA LOOPL . PUKA MANAWA LBRA rel_exp $@16 RBRA HOPAU LOOP LOOPR SEMI
+
+    PUKA  помера, и иде на стање 148
+
+
+Стање 142
+
+   43 check_body: WHEN literal . EC $@10 statement break_part
+
+    EC  помера, и иде на стање 149
+
+
+Стање 143
+
+   45 check_body: check_body WHEN . literal EC $@11 statement break_part
+
+    INUM   помера, и иде на стање 16
+    UINUM  помера, и иде на стање 17
+
+    literal  иде на стање 150
+
+
+Стање 144
+
+   51 otherwise_part: OTHERWISE . EC $@13 assignment_statement
+
+    EC  помера, и иде на стање 151
+
+
+Стање 145
+
+   41 check: CHECK LBRA ID $@9 RBRA LCURLYBRA check_body otherwise_part . RCURLYBRA
+
+    RCURLYBRA  помера, и иде на стање 152
+
+
+Стање 146
+
+   64 condition_exp: LBRA rel_exp $@17 RBRA QM iz DT . iz
+
+    INUM   помера, и иде на стање 16
+    UINUM  помера, и иде на стање 17
+    ID     помера, и иде на стање 137
+
+    iz       иде на стање 153
+    literal  иде на стање 139
+
+
+Стање 147
+
+   92 if_part: IF LBRA @21 rel_exp $@22 RBRA $@23 statement .
+
+    $основно  смањује користећи правило 92 (if_part)
+
+
+Стање 148
+
+   56 loop: LOOPL LOOP LOOPR @15 LCURLYBRA statement_list RCURLYBRA LOOPL PUKA . MANAWA LBRA rel_exp $@16 RBRA HOPAU LOOP LOOPR SEMI
+
+    MANAWA  помера, и иде на стање 154
+
+
+Стање 149
+
+   43 check_body: WHEN literal EC . $@10 statement break_part
+
+    $основно  смањује користећи правило 42 ($@10)
+
+    $@10  иде на стање 155
+
+
+Стање 150
+
+   45 check_body: check_body WHEN literal . EC $@11 statement break_part
+
+    EC  помера, и иде на стање 156
+
+
+Стање 151
+
+   51 otherwise_part: OTHERWISE EC . $@13 assignment_statement
+
+    $основно  смањује користећи правило 50 ($@13)
+
+    $@13  иде на стање 157
+
+
+Стање 152
+
+   41 check: CHECK LBRA ID $@9 RBRA LCURLYBRA check_body otherwise_part RCURLYBRA .
+
+    $основно  смањује користећи правило 41 (check)
+
+
+Стање 153
+
+   64 condition_exp: LBRA rel_exp $@17 RBRA QM iz DT iz .
+
+    $основно  смањује користећи правило 64 (condition_exp)
+
+
+Стање 154
+
+   56 loop: LOOPL LOOP LOOPR @15 LCURLYBRA statement_list RCURLYBRA LOOPL PUKA MANAWA . LBRA rel_exp $@16 RBRA HOPAU LOOP LOOPR SEMI
+
+    LBRA  помера, и иде на стање 158
+
+
+Стање 155
+
+   43 check_body: WHEN literal EC $@10 . statement break_part
+
+    LOOPL      помера, и иде на стање 40
+    CHECK      помера, и иде на стање 41
+    RETURN     помера, и иде на стање 42
+    IF         помера, и иде на стање 43
+    ID         помера, и иде на стање 44
+    LCURLYBRA  помера, и иде на стање 45
+
+    statement             иде на стање 159
+    check                 иде на стање 48
+    void_call             иде на стање 49
+    loop                  иде на стање 50
+    decrement             иде на стање 51
+    increment             иде на стање 52
+    compound_statement    иде на стање 53
+    assignment_statement  иде на стање 54
+    if_else               иде на стање 55
+    if_part               иде на стање 56
+    return                иде на стање 57
+
+
+Стање 156
+
+   45 check_body: check_body WHEN literal EC . $@11 statement break_part
+
+    $основно  смањује користећи правило 44 ($@11)
+
+    $@11  иде на стање 160
+
+
+Стање 157
+
+   51 otherwise_part: OTHERWISE EC $@13 . assignment_statement
+
+    ID  помера, и иде на стање 161
+
+    assignment_statement  иде на стање 162
+
+
+Стање 158
+
+   56 loop: LOOPL LOOP LOOPR @15 LCURLYBRA statement_list RCURLYBRA LOOPL PUKA MANAWA LBRA . rel_exp $@16 RBRA HOPAU LOOP LOOPR SEMI
+
+    INUM   помера, и иде на стање 16
+    UINUM  помера, и иде на стање 17
+    ID     помера, и иде на стање 63
+    LBRA   помера, и иде на стање 64
+
+    exp            иде на стање 112
+    condition_exp  иде на стање 67
+    ex             иде на стање 68
+    literal        иде на стање 69
+    function_call  иде на стање 70
+    rel_exp        иде на стање 163
+
+
+Стање 159
+
+   43 check_body: WHEN literal EC $@10 statement . break_part
+
+    BREAK  помера, и иде на стање 164
+
+    $основно  смањује користећи правило 46 (break_part)
+
+    break_part  иде на стање 165
+
+
+Стање 160
+
+   45 check_body: check_body WHEN literal EC $@11 . statement break_part
+
+    LOOPL      помера, и иде на стање 40
+    CHECK      помера, и иде на стање 41
+    RETURN     помера, и иде на стање 42
+    IF         помера, и иде на стање 43
+    ID         помера, и иде на стање 44
+    LCURLYBRA  помера, и иде на стање 45
+
+    statement             иде на стање 166
+    check                 иде на стање 48
+    void_call             иде на стање 49
+    loop                  иде на стање 50
+    decrement             иде на стање 51
+    increment             иде на стање 52
+    compound_statement    иде на стање 53
+    assignment_statement  иде на стање 54
+    if_else               иде на стање 55
+    if_part               иде на стање 56
+    return                иде на стање 57
+
+
+Стање 161
+
+   60 assignment_statement: ID . EQ_OP exp SEMI
+
+    EQ_OP  помера, и иде на стање 72
+
+
+Стање 162
+
+   51 otherwise_part: OTHERWISE EC $@13 assignment_statement .
+
+    $основно  смањује користећи правило 51 (otherwise_part)
+
+
+Стање 163
+
+   56 loop: LOOPL LOOP LOOPR @15 LCURLYBRA statement_list RCURLYBRA LOOPL PUKA MANAWA LBRA rel_exp . $@16 RBRA HOPAU LOOP LOOPR SEMI
+
+    $основно  смањује користећи правило 55 ($@16)
+
+    $@16  иде на стање 167
+
+
+Стање 164
+
+   48 break_part: BREAK . $@12 SEMI
+
+    $основно  смањује користећи правило 47 ($@12)
+
+    $@12  иде на стање 168
+
+
+Стање 165
+
+   43 check_body: WHEN literal EC $@10 statement break_part .
+
+    $основно  смањује користећи правило 43 (check_body)
+
+
+Стање 166
+
+   45 check_body: check_body WHEN literal EC $@11 statement . break_part
+
+    BREAK  помера, и иде на стање 164
+
+    $основно  смањује користећи правило 46 (break_part)
+
+    break_part  иде на стање 169
+
+
+Стање 167
+
+   56 loop: LOOPL LOOP LOOPR @15 LCURLYBRA statement_list RCURLYBRA LOOPL PUKA MANAWA LBRA rel_exp $@16 . RBRA HOPAU LOOP LOOPR SEMI
+
+    RBRA  помера, и иде на стање 170
+
+
+Стање 168
+
+   48 break_part: BREAK $@12 . SEMI
+
+    SEMI  помера, и иде на стање 171
+
+
+Стање 169
+
+   45 check_body: check_body WHEN literal EC $@11 statement break_part .
+
+    $основно  смањује користећи правило 45 (check_body)
+
+
+Стање 170
+
+   56 loop: LOOPL LOOP LOOPR @15 LCURLYBRA statement_list RCURLYBRA LOOPL PUKA MANAWA LBRA rel_exp $@16 RBRA . HOPAU LOOP LOOPR SEMI
+
+    HOPAU  помера, и иде на стање 172
+
+
+Стање 171
+
+   48 break_part: BREAK $@12 SEMI .
+
+    $основно  смањује користећи правило 48 (break_part)
+
+
+Стање 172
+
+   56 loop: LOOPL LOOP LOOPR @15 LCURLYBRA statement_list RCURLYBRA LOOPL PUKA MANAWA LBRA rel_exp $@16 RBRA HOPAU . LOOP LOOPR SEMI
+
+    LOOP  помера, и иде на стање 173
+
+
+Стање 173
+
+   56 loop: LOOPL LOOP LOOPR @15 LCURLYBRA statement_list RCURLYBRA LOOPL PUKA MANAWA LBRA rel_exp $@16 RBRA HOPAU LOOP . LOOPR SEMI
+
+    LOOPR  помера, и иде на стање 174
+
+
+Стање 174
+
+   56 loop: LOOPL LOOP LOOPR @15 LCURLYBRA statement_list RCURLYBRA LOOPL PUKA MANAWA LBRA rel_exp $@16 RBRA HOPAU LOOP LOOPR . SEMI
+
+    SEMI  помера, и иде на стање 175
+
+
+Стање 175
+
+   56 loop: LOOPL LOOP LOOPR @15 LCURLYBRA statement_list RCURLYBRA LOOPL PUKA MANAWA LBRA rel_exp $@16 RBRA HOPAU LOOP LOOPR SEMI .
+
+    $основно  смањује користећи правило 56 (loop)

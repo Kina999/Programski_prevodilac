@@ -1,0 +1,13 @@
+//OPIS: Razliciti tipovi u when i check
+function int main(){
+	int b;
+	int a = 3;
+	check (a){
+	when 1 =>
+		a = a + 5;
+		break;
+	when 2u =>
+		b = 3;
+		}
+	return 0;
+}

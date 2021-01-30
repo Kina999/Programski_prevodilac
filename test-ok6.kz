@@ -1,0 +1,11 @@
+//OPIS:Return
+//RETURN: 3
+function int main(){
+	int a = 3;
+	int b = 5;
+	if(a == b){
+		return b;
+	}else{
+		return a;
+	}
+}

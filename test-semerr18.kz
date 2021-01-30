@@ -1,0 +1,17 @@
+//OPIS:Razliciti tipovi izraza u conditional
+function int k(int a, int b, int c){
+	int x;
+	x = a + (b > c) ? b : c;
+	return x;
+}
+function int main(){
+	int a;
+	int c;
+	int x;
+	int b = 3;
+	unsigned int l = 3u;
+	a = 4;
+	x = a + (b > a) ? a : l;
+	c = k(a, b, x);
+	return c;
+}

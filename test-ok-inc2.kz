@@ -1,0 +1,14 @@
+//OPIS:Inkrement unutar iskaza,i zasebno
+//RETURN: 11
+function int k(int b){
+	int a = 4;
+	return a;
+}
+function int main(){
+	int b = 3;
+	int a;
+	b = 9;
+	a = b++ + 3;
+	b++;
+	return b++;
+}

@@ -1,0 +1,4 @@
+//OPIS: zarez na kraju
+function int foo(int x, unsigned int b,){
+	return x;
+}

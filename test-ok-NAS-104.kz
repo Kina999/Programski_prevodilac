@@ -1,0 +1,15 @@
+//OPIS: poziv funkcije  sa razlicitim tipovima parametra
+//RETURN: 2
+function unsigned int f(int k, unsigned int p, unsigned int o){
+	int g;
+	
+	g = k + 1 ;
+
+	return (p + o);
+} 
+
+function int main(){
+	unsigned int x;
+	x = f(3, 2u, 4u);
+	return 2;
+}

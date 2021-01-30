@@ -1,0 +1,17 @@
+//OPIS: void vise funkcija
+function void main() {
+    int a,b,c;
+		a = 0; 
+		b = 1; 
+		c = 0;
+}
+
+function void inc(){
+	int g;
+	g = 6;
+}
+
+function void func(){
+	int p;
+	p = p + 2;
+}

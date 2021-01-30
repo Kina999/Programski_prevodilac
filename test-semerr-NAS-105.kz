@@ -1,0 +1,8 @@
+//OPIS: visak argumenata
+function int foo(int x, unsigned int b, unsigned int c,int k, int p){
+	return x;
+}
+
+function int main(){	
+	return foo(3,3u,5u,5, 6, 7);
+}

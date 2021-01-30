@@ -1,0 +1,13 @@
+//OPIS: Check
+//RETURN: 18
+function int main(){
+	int a = 3;
+	int b = 1;
+	check(a){
+		when 1 => a = 5;
+		when 2 => a = 19; break;
+		when 3 => a = 1;
+		otherwise => a = 17 + a; 
+	}
+	return a;
+}

@@ -1,0 +1,11 @@
+//OPIS: return exp, void
+
+function void f(){
+	int k;
+	int g;
+	return k;
+} 
+
+function int main(){
+	return 0;
+}

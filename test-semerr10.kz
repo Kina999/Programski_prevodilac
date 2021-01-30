@@ -1,0 +1,5 @@
+//OPIS:Neispravna return vrijednost
+function int main(){
+	unsigned int b = 3u;
+	return b;
+}

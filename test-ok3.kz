@@ -1,0 +1,17 @@
+//OPIS:Poziv funkcije sa vise parametara
+//RETURN: 6
+function int k(int b, int k, int l){
+	return k;
+}
+function int main(){
+	int c = 5;
+	int b = 5;
+	int a = 2;
+	unsigned int x = 3u;
+	unsigned int l = 4u;
+	c = b;
+	a = b;
+	a++;
+	b = k(c, a, a);
+	return b;	
+}

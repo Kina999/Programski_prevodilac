@@ -1,0 +1,9 @@
+//OPIS: inc nad literalom kao statement
+function int main() {
+    int d = 2;
+    int b = 2;
+    int c = 2;
+
+    3++;
+	return 0;
+}  

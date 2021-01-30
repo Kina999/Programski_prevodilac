@@ -1,0 +1,17 @@
+//OPIS: Konstante u check iskazima nisu jedinstvene
+function int main(){
+	int b;
+	int a = 3;
+	check (a){
+	when 1 =>
+		a = a + 5;
+		break;
+	when 1 =>
+		{
+		b = 3;
+		}
+	otherwise =>
+		a = a + b;
+	}
+	return 0;
+}

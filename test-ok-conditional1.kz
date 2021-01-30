@@ -1,0 +1,17 @@
+//OPIS:Check expression koristi parametre f-je
+//RETURN: 11
+function int k(int a, int b, int c){
+	int x;
+	x = a + (b > c) ? b : c;
+	return x;
+}
+function int main(){
+	int a;
+	int c;
+	int x;
+	int b = 3;
+	a = 4;
+	x = a + (b > a) ? a : b;
+	c = k(a, b, x);
+	return c;
+}

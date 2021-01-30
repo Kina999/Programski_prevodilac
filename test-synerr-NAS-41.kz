@@ -1,0 +1,17 @@
+//OPIS: inc nad function_call
+
+function int f(){
+	int k = 3;
+	int g = 3;
+	return g;
+
+} 
+
+function int main() {
+    int d;
+	int b;
+	int c;
+	
+	c = f()++;
+	return 0;
+}

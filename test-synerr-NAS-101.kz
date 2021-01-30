@@ -1,0 +1,8 @@
+//OPIS: zarez na pocetku
+function int foo(, int p, unsigned int b){
+	return p;
+}
+
+function int main(){
+	return 0;
+}

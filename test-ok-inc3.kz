@@ -1,0 +1,12 @@
+//OPIS:Increment na parametru
+//RETURN: 11
+function int k(int b){
+	return b;
+}
+function int main(){
+	int x = 5;
+	int l;
+	l = k(x++);
+	l = l + x;
+	return l;
+}

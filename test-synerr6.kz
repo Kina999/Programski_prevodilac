@@ -1,0 +1,9 @@
+//OPIS: Postinkrement na funkciji
+function int k(){
+	return 3;
+}
+function int main(){
+	int b;
+	b = k()++;
+	return 0;
+}
